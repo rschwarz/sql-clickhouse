@@ -51,15 +51,16 @@
 
 ;; 5) Define login parameters and command line formatting.
 
-(defcustom sql-clickhouse-login-params '(user password server database)
-  "Login parameters to needed to connect to ClickhouseDB."
+(defcustom sql-clickhouse-login-params '()
+  "Login parameters needed to connect to ClickhouseDB."
   :type 'sql-login-params
   :group 'SQL)
 
 (sql-set-product-feature 'clickhouse
                          :sqli-login 'sql-clickhouse-login-params)
 
-(defcustom sql-clickhouse-options '("-X" "-Y" "-Z")
+(defcustom sql-clickhouse-options '("-c" "-h" "--port" "-s" "-u" "--password"
+                                    "-d" "-f" "-E" "-t")
   "List of additional options for `sql-clickhouse-program'."
   :type '(repeat string)
   :group 'SQL)
@@ -68,20 +69,20 @@
                          :sqli-options 'sql-clickhouse-options))
 
 (defun sql-comint-clickhouse (product options)
-  "Connect ti ClickhouseDB in a comint buffer."
+  "Connect to ClickHouse in a comint buffer."
 
   ;; Do something with `sql-user', `sql-password',
   ;; `sql-database', and `sql-server'.
   (let ((params
          (append
           (if (not (string= "" sql-user))
-              (list "-U" sql-user))
+              (list "-u" sql-user))
           (if (not (string= "" sql-password))
-              (list "-P" sql-password))
+              (list "--password" sql-password))
           (if (not (string= "" sql-database))
-              (list "-D" sql-database))
+              (list "-d" sql-database))
           (if (not (string= "" sql-server))
-              (list "-S" sql-server))
+              (list "-h" sql-server))
           options)))
     (sql-comint product params)))
 
