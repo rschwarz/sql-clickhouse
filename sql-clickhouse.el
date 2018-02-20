@@ -3,7 +3,13 @@
 ;; Author: Robert Schwarz <mail@rschwarz.net>
 ;; URL: https://github.com/leethargo/sql-clickhouse
 
+
+;;; Commentary:
+;; Add new product type ClickHouse for SQL mode in Emacs.
+
 (require 'sql)
+
+;;; Code:
 
 (defvar sql-mode-clickhouse-font-lock-keywords
   (list
@@ -148,3 +154,7 @@
                     :sqli-comint-func 'sql-comint-clickhouse))
 
 (provide 'sql-clickhouse)
+
+(provide 'sql-clickhouse)
+
+;;; sql-clickhouse.el ends here
