@@ -37,17 +37,17 @@
 ;; 4) Define the interactive command interpreter for the database
 ;;    product.
 
-(defcustom sql-clickhouse-program "iclickhouse"
-  "Command to start iclickhouse by ClickhouseDB."
+(defcustom sql-clickhouse-program "clickhouse-client"
+  "Command to start clickhouse-client by ClickHouse."
   :type 'file
   :group 'SQL)
 
 (sql-set-product-feature 'clickhouse
                          :sqli-program 'sql-clickhouse-program)
 (sql-set-product-feature 'clickhouse
-                         :prompt-regexp "^clickhousedb> ")
+                         :prompt-regexp "^:) ")
 (sql-set-product-feature 'clickhouse
-                         :prompt-length 7)
+                         :prompt-length 3)
 
 ;; 5) Define login parameters and command line formatting.
 
