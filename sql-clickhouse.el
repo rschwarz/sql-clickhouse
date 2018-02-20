@@ -146,7 +146,9 @@
   :group 'SQL)
 
 (defun sql-clickhouse-comint (product options)
-  "Connect to ClickHouse in a comint buffer."
+  "Connect to ClickHouse in a comint buffer.
+Argument PRODUCT name of the SQL product.
+Argument OPTIONS additional options."
 
   ;; Do something with `sql-user', `sql-password',
   ;; `sql-database', and `sql-server'.
@@ -164,7 +166,8 @@
     (sql-comint product params)))
 
 (defun sql-clickhouse (&optional buffer)
-  "Run clickhouse-client by ClickHouse as an inferior process."
+  "Run clickhouse-client by ClickHouse as an inferior process.
+Optional argument BUFFER current buffer."
   (interactive "P")
   (sql-product-interactive 'clickhouse buffer))
 
