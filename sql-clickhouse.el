@@ -6,11 +6,8 @@
 (require 'sql)
 
 (defvar sql-mode-clickhouse-font-lock-keywords
-  (sql-font-lock-keywords-builder 'font-lock-keyword-face nil
-                                  "array join" "attach" "detach" "engine"
-                                  "exists" "freeze" "kill query" "materialized"
-                                  "on cluster" "optimize" "partition" "prewhere"
-                                  "sample" "use" "with totals")
+  '(("\\b\\(a\\(?:rray join\\|ttach\\)\\|detach\\|e\\(?:ngine\\|xists\\)\\|freeze\\|kill query\\|materialized\\|o\\(?:n cluster\\|ptimize\\)\\|p\\(?:artition\\|rewhere\\)\\|sample\\|use\\|with totals\\)\\b"
+     . font-lock-keyword-face))
   "ClickhouseDB SQL keywords used by font-lock.")
 
 (defcustom sql-clickhouse-program "clickhouse-client"
