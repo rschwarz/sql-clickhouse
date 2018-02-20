@@ -20,8 +20,7 @@
   :type 'sql-login-params
   :group 'SQL)
 
-(defcustom sql-clickhouse-options '("-c" "-h" "--port" "-s" "-u" "--password"
-                                    "-d" "-f" "-E" "-t")
+(defcustom sql-clickhouse-options '()
   "List of additional options for `sql-clickhouse-program'."
   :type '(repeat string)
   :group 'SQL)
