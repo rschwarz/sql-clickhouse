@@ -9,7 +9,7 @@
 
 ;; 1) Add the product to the list of known products.
 
-(sql-add-product 'clickhouse "ClickhouseDB"
+(sql-add-product 'clickhouse "ClickHouse"
                  '(:free-software t))
 
 ;; 2) Define font lock settings.  All ANSI keywords will be
