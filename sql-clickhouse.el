@@ -5,17 +5,6 @@
 
 (require 'sql)
 
-;;; Following the template from sql.el (builtin):
-
-;; 1) Add the product to the list of known products.
-
-(sql-add-product 'clickhouse "ClickHouse"
-                 '(:free-software t))
-
-;; 2) Define font lock settings.  All ANSI keywords will be
-;;    highlighted automatically, so only product specific keywords
-;;    need to be defined here.
-
 (defvar sql-mode-clickhouse-font-lock-keywords
   (sql-font-lock-keywords-builder 'font-lock-keyword-face nil
                                   "array join" "attach" "detach" "engine"
@@ -24,49 +13,21 @@
                                   "sample" "use" "with totals")
   "ClickhouseDB SQL keywords used by font-lock.")
 
-(sql-set-product-feature 'clickhouse
-                         :font-lock
-                         'sql-mode-clickhouse-font-lock-keywords)
-
-;; 3) Define any special syntax characters including comments and
-;;    identifier characters.
-
-;; (sql-set-product-feature 'clickhouse
-;;                          :syntax-alist ((?# . "_")))
-
-;; 4) Define the interactive command interpreter for the database
-;;    product.
-
 (defcustom sql-clickhouse-program "clickhouse-client"
   "Command to start clickhouse-client by ClickHouse."
   :type 'file
   :group 'SQL)
-
-(sql-set-product-feature 'clickhouse
-                         :sqli-program 'sql-clickhouse-program)
-(sql-set-product-feature 'clickhouse
-                         :prompt-regexp "^:) ")
-(sql-set-product-feature 'clickhouse
-                         :prompt-length 3)
-
-;; 5) Define login parameters and command line formatting.
 
 (defcustom sql-clickhouse-login-params '()
   "Login parameters needed to connect to ClickhouseDB."
   :type 'sql-login-params
   :group 'SQL)
 
-(sql-set-product-feature 'clickhouse
-                         :sqli-login 'sql-clickhouse-login-params)
-
 (defcustom sql-clickhouse-options '("-c" "-h" "--port" "-s" "-u" "--password"
                                     "-d" "-f" "-E" "-t")
   "List of additional options for `sql-clickhouse-program'."
   :type '(repeat string)
   :group 'SQL)
-
-(sql-set-product-feature 'clickhouse
-                         :sqli-options 'sql-clickhouse-options))
 
 (defun sql-comint-clickhouse (product options)
   "Connect to ClickHouse in a comint buffer."
@@ -86,12 +47,19 @@
           options)))
     (sql-comint product params)))
 
-(sql-set-product-feature 'clickhouse
-                         :sqli-comint-func 'sql-comint-clickhouse)
-
-;; 6) Define a convenience function to invoke the SQL interpreter.
-
 (defun sql-clickhouse (&optional buffer)
   "Run clickhouse-client by ClickHouse as an inferior process."
   (interactive "P")
   (sql-product-interactive 'clickhouse buffer))
+
+(eval-after-load "sql"
+  '(sql-add-product 'clickhouse "ClickHouse"
+                    :font-lock 'sql-mode-clickhouse-font-lock-keywords
+                    :sqli-program 'sql-clickhouse-program
+                    :prompt-regexp "^:) "
+                    :prompt-length 3
+                    :sqli-login 'sql-clickhouse-login-params
+                    :sqli-options 'sql-clickhouse-options
+                    :sqli-comint-func 'sql-comint-clickhouse))
+
+(provide 'sql-clickhouse)
