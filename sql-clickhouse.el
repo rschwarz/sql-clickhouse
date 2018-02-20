@@ -11,7 +11,7 @@
 
 ;;; Code:
 
-(defvar sql-mode-clickhouse-font-lock-keywords
+(defvar sql-clickhouse-font-lock-keywords
   (list
    ;; keywords (non-ANSI)
    (sql-font-lock-keywords-builder
@@ -119,7 +119,7 @@
   :type '(repeat string)
   :group 'SQL)
 
-(defun sql-comint-clickhouse (product options)
+(defun sql-clickhouse-comint (product options)
   "Connect to ClickHouse in a comint buffer."
 
   ;; Do something with `sql-user', `sql-password',
@@ -144,14 +144,14 @@
 
 (eval-after-load "sql"
   '(sql-add-product 'clickhouse "ClickHouse"
-                    :font-lock 'sql-mode-clickhouse-font-lock-keywords
+                    :font-lock 'sql-clickhouse-font-lock-keywords
                     :sqli-program 'sql-clickhouse-program
                     :prompt-regexp "^:) "
                     :prompt-length 3
                     :prompt-cont-regexp "^:-] "
                     :sqli-login 'sql-clickhouse-login-params
                     :sqli-options 'sql-clickhouse-options
-                    :sqli-comint-func 'sql-comint-clickhouse))
+                    :sqli-comint-func 'sql-clickhouse-comint))
 
 (provide 'sql-clickhouse)
 
