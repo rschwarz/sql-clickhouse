@@ -31,8 +31,8 @@
 ;; 3) Define any special syntax characters including comments and
 ;;    identifier characters.
 
-(sql-set-product-feature 'clickhouse
-                         :syntax-alist ((?# . "_")))
+;; (sql-set-product-feature 'clickhouse
+;;                          :syntax-alist ((?# . "_")))
 
 ;; 4) Define the interactive command interpreter for the database
 ;;    product.
