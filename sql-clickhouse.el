@@ -92,6 +92,6 @@
 ;; 6) Define a convenience function to invoke the SQL interpreter.
 
 (defun sql-clickhouse (&optional buffer)
-  "Run iclickhouse by ClickhouseDB as an inferior process."
+  "Run clickhouse-client by ClickHouse as an inferior process."
   (interactive "P")
   (sql-product-interactive 'clickhouse buffer))
