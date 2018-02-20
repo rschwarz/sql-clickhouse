@@ -58,6 +58,7 @@
                     :sqli-program 'sql-clickhouse-program
                     :prompt-regexp "^:) "
                     :prompt-length 3
+                    :prompt-cont-regexp "^:-] "
                     :sqli-login 'sql-clickhouse-login-params
                     :sqli-options 'sql-clickhouse-options
                     :sqli-comint-func 'sql-comint-clickhouse))
