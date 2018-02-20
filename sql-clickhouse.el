@@ -3,6 +3,8 @@
 ;; Author: Robert Schwarz <mail@rschwarz.net>
 ;; URL: https://github.com/leethargo/sql-clickhouse
 
+(require 'sql)
+
 ;;; Following the template from sql.el (builtin):
 
 ;; 1) Add the product to the list of known products.
@@ -15,8 +17,11 @@
 ;;    need to be defined here.
 
 (defvar sql-mode-clickhouse-font-lock-keywords
-  '(("\\b\\(red\\|orange\\|yellow\\)\\b"
-     . font-lock-keyword-face))
+  (sql-font-lock-keywords-builder 'font-lock-keyword-face nil
+                                  "array join" "attach" "detach" "engine"
+                                  "exists" "freeze" "kill query" "materialized"
+                                  "on cluster" "optimize" "partition" "prewhere"
+                                  "sample" "use" "with totals")
   "ClickhouseDB SQL keywords used by font-lock.")
 
 (sql-set-product-feature 'clickhouse
