@@ -183,6 +183,4 @@ Optional argument BUFFER current buffer."
 
 (provide 'sql-clickhouse)
 
-(provide 'sql-clickhouse)
-
 ;;; sql-clickhouse.el ends here
