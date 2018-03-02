@@ -154,13 +154,13 @@ Argument OPTIONS additional options."
   ;; `sql-database', and `sql-server'.
   (let ((params
          (append
-          (if (not (string= "" sql-user))
+          (unless (string= "" sql-user)
               (list "-u" sql-user))
-          (if (not (string= "" sql-password))
+          (unless (string= "" sql-password)
               (list "--password" sql-password))
-          (if (not (string= "" sql-database))
+          (unless (string= "" sql-database)
               (list "-d" sql-database))
-          (if (not (string= "" sql-server))
+          (unless (string= "" sql-server)
               (list "-h" sql-server))
           options)))
     (sql-comint product params)))
