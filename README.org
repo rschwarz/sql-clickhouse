@@ -1,3 +1,5 @@
+[[https://melpa.org/#/sql-clickhouse][file:https://melpa.org/packages/sql-clickhouse-badge.svg]]
+
 We add [[https://clickhouse.yandex/][ClickHouse]] as a new product type to the builtin [[http://repo.or.cz/w/emacs.git/blob/HEAD:/lisp/progmodes/sql.el][sql-mode]] in Emacs. That
 way, we get syntax highlighting and can communicate with the DB using the CLI
 =clickhouse-client=.
