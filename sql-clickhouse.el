@@ -165,6 +165,7 @@ Argument OPTIONS additional options."
           options)))
     (sql-comint product params)))
 
+;;;###autoload
 (defun sql-clickhouse (&optional buffer)
   "Run clickhouse-client by ClickHouse as an inferior process.
 Optional argument BUFFER current buffer."
