@@ -3,3 +3,15 @@
 We add [[https://clickhouse.yandex/][ClickHouse]] as a new product type to the builtin [[http://repo.or.cz/w/emacs.git/blob/HEAD:/lisp/progmodes/sql.el][sql-mode]] in Emacs. That
 way, we get syntax highlighting and can communicate with the DB using the CLI
 =clickhouse-client=.
+
+Note that the client assumes being run in a fully-functional terminal. While
+running a query, it will print updated statistics every 100ms. Inside Emacs,
+with the =comint= interface, these messages accumulate rather than update in
+place, which is kind of messy (including some coloring). I failed to disable
+this behavior so far, but there is a parameter to control the frequency of these
+updates in microseconds. I use the following query to increase it to 10 seconds:
+
+#+BEGIN_SRC
+-- 10 seconds in microseconds
+SET interactive_delay = 10000000;
+#+END_SRC
