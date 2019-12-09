@@ -145,7 +145,7 @@
   :type '(repeat string)
   :group 'SQL)
 
-(defun sql-clickhouse-comint (product options)
+(defun sql-clickhouse-comint (product options &optional buffname)
   "Connect to ClickHouse in a comint buffer.
 Argument PRODUCT name of the SQL product.
 Argument OPTIONS additional options."
@@ -163,7 +163,7 @@ Argument OPTIONS additional options."
           (unless (string= "" sql-server)
               (list "-h" sql-server))
           options)))
-    (sql-comint product params)))
+    (sql-comint product params buffname)))
 
 ;;;###autoload
 (defun sql-clickhouse (&optional buffer)
@@ -172,15 +172,14 @@ Optional argument BUFFER current buffer."
   (interactive "P")
   (sql-product-interactive 'clickhouse buffer))
 
-(sql-add-product 'clickhouse "ClickHouse"
-                 :font-lock 'sql-clickhouse-font-lock-keywords
-                 :sqli-program 'sql-clickhouse-program
-                 :prompt-regexp "^:) "
-                 :prompt-length 3
-                 :prompt-cont-regexp "^:-] "
-                 :sqli-login 'sql-clickhouse-login-params
-                 :sqli-options 'sql-clickhouse-options
-                 :sqli-comint-func 'sql-clickhouse-comint)
+(sql-add-product 'clickhouse "ClickHouse" '(:font-lock sql-clickhouse-font-lock-keywords
+    				            :sqli-program sql-clickhouse-program
+				            :prompt-regexp "^:) "
+				            :prompt-length 3
+					    :prompt-cont-regexp "^:-] "
+					    :sqli-login sql-clickhouse-login-params
+					    :sqli-options sql-clickhouse-options
+					    :sqli-comint-func sql-clickhouse-comint))
 
 (provide 'sql-clickhouse)
 
