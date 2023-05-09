@@ -50,9 +50,21 @@
    (sql-font-lock-keywords-builder
     'font-lock-type-face nil
     ;; column types
-    "Array" "Date" "DateTime" "Enum8" "Enum16" "FixedString" "Float32"
-    "Float64" "Int8" "Int16" "Int32" "Int64" "UInt8" "UInt16" "UInt32"
-    "UInt64" "String" "Tuple"
+    "Float32"
+    "Float64"
+    "Int8" "Int16" "Int32" "Int64" "Int128" "Int256"
+    "UInt8" "UInt16" "UInt32" "UInt64" "UInt128" "UInt256"
+    "Decimal" "Decimal32" "Decimal64" "Decimal128" "Decimal256"
+    "Date" "DateTime" "DateTime64"
+    "Enum8" "Enum16"
+    "Array"
+    "Tuple"
+    "FixedString"
+    "String"
+    "Nullable"
+    "Map"
+    "JSON"
+    "Nested"
 
     ;; engine types
     "AggregatingMergeTree" "Buffer" "CollapsingMergeTree" "Distributed"
@@ -155,13 +167,13 @@ Argument OPTIONS additional options."
   (let ((params
          (append
           (unless (string= "" sql-user)
-              (list "-u" sql-user))
+            (list "--user" sql-user))
           (unless (string= "" sql-password)
-              (list "--password" sql-password))
+            (list "--password" sql-password))
           (unless (string= "" sql-database)
-              (list "-d" sql-database))
+            (list "--database" sql-database))
           (unless (string= "" sql-server)
-              (list "-h" sql-server))
+            (list "--host" sql-server))
           options)))
     (sql-comint product params buffname)))
 
@@ -172,15 +184,14 @@ Optional argument BUFFER current buffer."
   (interactive "P")
   (sql-product-interactive 'clickhouse buffer))
 
-(sql-add-product 'clickhouse "ClickHouse" '(:font-lock sql-clickhouse-font-lock-keywords
-    				            :sqli-program sql-clickhouse-program
-				            :prompt-regexp "^:) "
-				            :prompt-length 3
-					    :prompt-cont-regexp "^:-] "
-					    :sqli-login sql-clickhouse-login-params
-					    :sqli-options sql-clickhouse-options
-					    :sqli-comint-func sql-clickhouse-comint))
-
+(sql-add-product 'clickhouse "ClickHouse"
+		 :font-lock 'sql-clickhouse-font-lock-keywords
+		 :sqli-program 'sql-clickhouse-program
+		 :sqli-login 'sql-clickhouse-login-params
+		 :sqli-options 'sql-clickhouse-options
+		 :sqli-comint-func 'sql-clickhouse-comint
+		 :sqli-prompt-regexp "^[^\s]* :\) "
+		 :sqli-prompt-cont-regexp "^[^\s]*:-\] ")
 (provide 'sql-clickhouse)
 
 ;;; sql-clickhouse.el ends here
