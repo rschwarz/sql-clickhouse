@@ -50,9 +50,21 @@
    (sql-font-lock-keywords-builder
     'font-lock-type-face nil
     ;; column types
-    "Array" "Date" "DateTime" "Enum8" "Enum16" "FixedString" "Float32"
-    "Float64" "Int8" "Int16" "Int32" "Int64" "UInt8" "UInt16" "UInt32"
-    "UInt64" "String" "Tuple"
+    "Float32"
+    "Float64"
+    "Int8" "Int16" "Int32" "Int64" "Int128" "Int256"
+    "UInt8" "UInt16" "UInt32" "UInt64" "UInt128" "UInt256"
+    "Decimal" "Decimal32" "Decimal64" "Decimal128" "Decimal256"
+    "Date" "DateTime" "DateTime64"
+    "Enum8" "Enum16"
+    "Array"
+    "Tuple"
+    "FixedString"
+    "String"
+    "Nullable"
+    "Map"
+    "JSON"
+    "Nested"
 
     ;; engine types
     "AggregatingMergeTree" "Buffer" "CollapsingMergeTree" "Distributed"
