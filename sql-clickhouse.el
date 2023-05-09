@@ -172,15 +172,14 @@ Optional argument BUFFER current buffer."
   (interactive "P")
   (sql-product-interactive 'clickhouse buffer))
 
-(sql-add-product 'clickhouse "ClickHouse" '(:font-lock sql-clickhouse-font-lock-keywords
-    				            :sqli-program sql-clickhouse-program
-				            :prompt-regexp "^:) "
-				            :prompt-length 3
-					    :prompt-cont-regexp "^:-] "
-					    :sqli-login sql-clickhouse-login-params
-					    :sqli-options sql-clickhouse-options
-					    :sqli-comint-func sql-clickhouse-comint))
-
+(sql-add-product 'clickhouse "ClickHouse"
+		 :font-lock 'sql-clickhouse-font-lock-keywords
+		 :sqli-program 'sql-clickhouse-program
+		 :sqli-login 'sql-clickhouse-login-params
+		 :sqli-options 'sql-clickhouse-options
+		 :sqli-comint-func 'sql-clickhouse-comint
+		 :sqli-prompt-regexp "^[^\s]* :\) "
+		 :sqli-prompt-cont-regexp "^[^\s]*:-\] ")
 (provide 'sql-clickhouse)
 
 ;;; sql-clickhouse.el ends here
