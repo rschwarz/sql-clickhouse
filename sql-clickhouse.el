@@ -155,13 +155,13 @@ Argument OPTIONS additional options."
   (let ((params
          (append
           (unless (string= "" sql-user)
-              (list "-u" sql-user))
+            (list "--user" sql-user))
           (unless (string= "" sql-password)
-              (list "--password" sql-password))
+            (list "--password" sql-password))
           (unless (string= "" sql-database)
-              (list "-d" sql-database))
+            (list "--database" sql-database))
           (unless (string= "" sql-server)
-              (list "-h" sql-server))
+            (list "--host" sql-server))
           options)))
     (sql-comint product params buffname)))
 
